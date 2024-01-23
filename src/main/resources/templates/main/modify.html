@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
 
-</body>
-</html>
+	<th:block th:fragment="content">
+
+	
+		<h1 class="mt-4" style="font-weight: bold">상품 정보 수정하기</h1>
+	
+	<div class="form-group">
+            <label >상품번호</label>
+            <input type="text" class="form-control" name="no" th:value="${dto.no}" readonly>
+        </div>
+         <div class="form-group">
+            <label >제조사</label>
+            <input type="text" class="form-control" name="company" th:value="${dto.company}" >
+        </div>
+          <div class="form-group">
+            <label >상품명</label>
+            <input type="text" class="form-control" name="product" th:value="${dto.product}" >
+        </div>
+         <div class="form-group">
+            <label >내용</label>
+            <textarea class="form-control" rows="5" name="content">[[${dto.content}]]</textarea>
+        </div>
+         <div class="form-group">
+            <label >가격</label>
+            <input type="text" class="form-control" name="price" th:value="${dto.price}" >
+        </div>
+        
+         <button type="button" class="btn btn-primary modifyBtn">저장하기</button>
+
+        <button type="button" class="btn btn-info listBtn">목록으로</button>
+ </th:block>
+
+</th:block>
+
+        <button type="button" class="btn btn-danger removeBtn">삭제</button>
+

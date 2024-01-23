@@ -16,7 +16,7 @@ public class ProductServiceTest {
 	
 	@Test
 	public void 게시물등록() {
-		ProductDTO dto = ProductDTO.builder().company("에뛰드").content("틴트입니다").price(8900).product("픽싱틴트").build();
+		ProductDTO dto = ProductDTO.builder().company("정샘물").content("쿠션입니다").price(41000).product("쿠션").build();
 		int no = service.register(dto);
 		System.out.println("새로운 게시물 번호: " + no);
 	}

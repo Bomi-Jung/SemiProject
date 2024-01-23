@@ -31,6 +31,23 @@ public class MainController {
 		model.addAttribute("list", list);
 	}
 	
+	//등록화면
+	@GetMapping("/register")
+	public void register() {
+		
+	}
+	
+	//상세화면
+	@GetMapping("/read")
+	public void read() {
+		
+	}
+	
+	//수정화면
+	@GetMapping("/modify")
+	public void modify() {
+		
+	}
 	
 }
 
