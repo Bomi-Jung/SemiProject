@@ -12,7 +12,7 @@ import com.example.demo.dto.ProductDTO;
 import com.example.demo.service.ProductService;
 
 @Controller
-@RequestMapping("/layout")
+@RequestMapping("/main")
 public class MainController {
 	
 	@Autowired
@@ -23,12 +23,15 @@ public class MainController {
 		
 	}
 	
+
 	//목록화면
 	@GetMapping("/list")
 	public void list(Model model) {
 		List<ProductDTO> list = service.getList(); // 서비스로 상품 목록 가져오기
 		model.addAttribute("list", list);
 	}
+	
+	
 }
 
 
