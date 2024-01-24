@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,6 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	//목록 조회하기
-
 	@Override
 	public List<ProductDTO> getList() {
 		List<Products> result = repository.findAll(); // 데이터베이스에서 상품목록을 가져온다
@@ -45,8 +45,56 @@ public class ProductServiceImpl implements ProductService {
 
 
 	}
+
+	//상품 상세정보 조회하기 
+	@Override
+	public ProductDTO read(int no) {
+		Optional<Products> result = repository.findById(no);
+		
+		if(result.isPresent()) {
+		Products products = result.get();
+		ProductDTO dto = entityToDto(products);
+		return dto;	
+	}else {
+		return null;
+	}
 	
 	
 	
 
+	}
+
+	//상품수정하기
+	@Override
+	public void modify(ProductDTO dto) {
+	//업데이트 할 항목은 '상품명','가격', '내용'
+		
+	//전딜받은 DTO에서 게시물 번호를 꺼내고, 해당 게시물 조회 
+	 Optional<Products> result = repository.findById(dto.getNo());
+	 if(result.isPresent()) {
+		 Products entity = result.get();
+		 
+		 //기존 엔티티에서 변경내용을 변경
+		 entity.setProduct(dto.getProduct());
+		 entity.setContent(dto.getContent());
+		 entity.setPrice(dto.getPrice());
+		 
+		 //다시 저장
+		 repository.save(entity);
+	 }
+	}
+
+	//상품 삭제하기
+	@Override
+	public int remove(int no) {
+		Optional<Products> result = repository.findById(no);
+		
+		if (result.isPresent()) {
+			repository.deleteById(no);
+			return 1; //성공
+		} else {
+			return 0; //실패 
+		}
+		
+	}
 }

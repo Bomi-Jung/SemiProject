@@ -13,6 +13,15 @@ public interface ProductService {
 	//목록 조회하기
 	List<ProductDTO> getList();
 	
+	//상품 상세 조회
+	ProductDTO read(int no);
+	
+	//상품 수정하기
+	void modify(ProductDTO dto);
+	
+	//상품 삭제하기
+	int remove(int no);
+	
 	//dto를 엔티티로 변환하는 메소드
 	default Products dtoToEntity(ProductDTO dto) { //default 키워드를 사용하여 일반메소드 추가
 		Products entity = Products.builder().no(dto.getNo()).company(dto.getCompany()).content(dto.getContent()).price(dto.getPrice()).product(dto.getProduct()).build();
