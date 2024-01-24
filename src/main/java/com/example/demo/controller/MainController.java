@@ -71,15 +71,14 @@ public class MainController {
 
 	// 수정처리
 	@PostMapping("/modify")
-	public String modifyPost(@RequestParam(name= "no") int no, ProductDTO dto, RedirectAttributes redirectAttributes) {
-		 // 로그 추가
-	    System.out.println("Received no: " + no);
+	public String modifyPost(ProductDTO dto, RedirectAttributes redirectAttributes) {
+
 		// 상품 수정
 		service.modify(dto);
 		// 리다이렉트 주소에 파라미터 추가
-		redirectAttributes.addFlashAttribute("no", no);
+		redirectAttributes.addFlashAttribute("no", dto.getNo());
 		// 상세화면으로 이동
-		return "redirect:/main/read";
+		return "redirect:/main/read?no=" + dto.getNo() ;
 	}
 
 	// 삭제처리
