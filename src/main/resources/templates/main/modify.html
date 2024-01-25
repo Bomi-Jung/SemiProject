@@ -64,13 +64,14 @@
 			//삭제처리
 			$(".removeBtn").click(
 					function() {
-						var productNo = $(this).data("no");
-				        if (!confirm(productNo + " 번째 상품을 삭제하시겠습니까?")) {
-				            return;
-						}
-						form.attr("action", "/main/remove").attr("method",
-								"post").submit();
-					});
+						if(!confirm("삭제하시겠습니까?")){
+		                    return ;
+		                }
+						form
+	                    .attr("action", "/main/remove")
+	                    .attr("method","post")
+	                    .submit();
+	            });
 		</script>
 
 	</th:block>
