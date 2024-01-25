@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+
+    <th:block th:fragment="content">
+
+        <section class="py-5">
+            <!-- 상품등록 버튼 생성 -->
+            <span style="display: flex; justify-content: center;"> <a
+                    th:href="@{/product/register}">
+                    <button type="button" class="btn btn-outline-primary">상품등록</button>
+                </a>
+            </span>
+
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                        <!-- 게시물 리스트를 하나씩 꺼내서 처리하기 -->
+                        <!-- classappend 사용하여  3번째 index마다 행(row)을 추가  -->
+                    <th:block th:each="dto, iterStat : ${list}" th:classappend="${iterStat.index % 3 == 0} ? 'row' : ''">
+                   
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Product image -->
+                                <!-- 이미지 자리 -->
+
+                                <!-- Product details -->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- 상품번호 -->
+                                        <h6>상품번호 [[${#temporals.format(dto.regDate, 'yyyyMMdd')}]]-[[${dto.no}]]</h6>
+                                        <!-- product company -->
+                                        제조사: [[${dto.company}]]
+                                        <!-- Product name -->
+                                        <h4 class="fw-bolder">[[${dto.product}]]</h4>
+                                        <!-- Product price -->
+                                        <h5>가격: [[${dto.price}]]</h5>
+                                    </div>
+                                </div>
+
+                                <!-- Product actions -->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center">
+                                        <a class="btn btn-outline-dark mt-auto"
+                                            th:href="@{/product/read(no = ${dto.no})}">상품상세보기</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product actions -->
+                        <div th:if="${iterStat.count != null and iterStat.count % 3 == 0}" class="w-100"></div>
+                    </th:block>
+                </div>
+            </div>
+        </section>
+
+        <!-- 인라인 속성을 사용하여 타입 처리 -->
+        <!-- 전달받은 값을 모달창으로 출력 -->
+        <!-- 서버에서 전달한 처리 결과를 msg 변수에 저장 -->
+        <!-- 글번호가 있는지 확인 -->
+        <script th:inline="javascript">
+            $(document).ready(function () {
+                var msg = [[${msg}]];
+                if (msg != null) {
+                    alert(msg + "번 글이 등록되었습니다.");
+                }
+            });
+        </script>
+    </th:block>
+
+</th:block>

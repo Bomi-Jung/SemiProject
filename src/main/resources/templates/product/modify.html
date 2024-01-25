@@ -52,13 +52,13 @@
 						}
 						//form~attr!submit: 서버에 게시물 수정 요청
 						//폼태그는 PUT 방식을 사용할 수 없으므로, POST 방식으로 처리
-						form.attr("action", "/main/modify").attr("method",
+						form.attr("action", "/product/modify").attr("method",
 								"post").submit();
 					});
 			//목록처리
 			$(".listBtn").click(
 					function() {
-						form.attr("action", "/main/list").attr("method", "get")
+						form.attr("action", "/product/list").attr("method", "get")
 								.submit();
 					})
 			//삭제처리
@@ -68,7 +68,7 @@
 		                    return ;
 		                }
 						form
-	                    .attr("action", "/main/remove")
+	                    .attr("action", "/product/remove")
 	                    .attr("method","post")
 	                    .submit();
 	            });

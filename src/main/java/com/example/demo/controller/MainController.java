@@ -15,7 +15,7 @@ import com.example.demo.dto.ProductDTO;
 import com.example.demo.service.ProductService;
 
 @Controller
-@RequestMapping("/main")
+@RequestMapping("/product")
 public class MainController {
 
 	@Autowired
@@ -27,7 +27,7 @@ public class MainController {
 	}
 
 	// 목록화면
-	@GetMapping("/list")
+	@GetMapping({"/list","/list2"})
 	public void list(Model model) {
 		List<ProductDTO> list = service.getList(); // 서비스로 상품 목록 가져오기
 		model.addAttribute("list", list);
@@ -51,7 +51,7 @@ public class MainController {
 		redirectAttributes.addFlashAttribute("msg", no);
 
 		// 목록화면으로 이동. HTML 경로 아닌 url 주소를 작성할 것
-		return "redirect:/main/list";
+		return "redirect:/product/list";
 	}
 
 	// 상세화면(조회처리)
@@ -78,14 +78,14 @@ public class MainController {
 		// 리다이렉트 주소에 파라미터 추가
 		redirectAttributes.addFlashAttribute("no", dto.getNo());
 		// 상세화면으로 이동
-		return "redirect:/main/read?no=" + dto.getNo() ;
+		return "redirect:/product/read?no=" + dto.getNo() ;
 	}
 
 	// 삭제처리
 	@PostMapping("/remove")
 	public String removePost(@RequestParam(name = "no") int no) {
 		service.remove(no);
-		return "redirect:/main/list";
+		return "redirect:/product/list";
 	}
 
 }
