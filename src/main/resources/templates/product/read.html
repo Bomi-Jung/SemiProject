@@ -30,6 +30,11 @@
 			<label>가격</label> <input type="text" class="form-control"
 				th:value="${dto.price}" readonly>
 		</div>
+		<!-- 이미지 출력(3) 외부에 있는 이미지를 상대경로로 출력 -->
+		        <div class="form-group">
+            <label >상품 이미지</label>
+            <img th:src="@{/uploadfile/banana.png}">
+        </div>
 	
 	    <!-- 버튼을 클릭하면 수정화면으로 이동 -->
         <a th:href="@{/product/modify(no = ${dto.no})}"> <!-- (키=값) 부분은 파라미터로 (?no=1) 처리됨 -->
